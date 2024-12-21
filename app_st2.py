@@ -128,7 +128,6 @@ def GetThumbnail(image_file):
 
 def Readtextfromimage(image_file):
     st.write('image reading')
-    st.image(image_file)
     image_data = io.BytesIO(image_file.read())
     read_op = cv_client.read_in_stream(image_data, raw=True)
 
