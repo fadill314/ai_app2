@@ -113,7 +113,41 @@ def AnalyzeImage(image_file):
     st.write("**moderation ratings:**")
     ratings = "\n -Adult: {} \n -Racy: {} \n -Gore: {}".format(analysis.adult.is_adult_content, analysis.adult.is_racy_content, analysis.adult.is_gory_content)
     st.write(ratings)
+
+def DetectFace(image_file):
+    st.write('Face Detection : ', image_file.name)
+
+    # Specify features to be retrieved
+    features = [VisualFeatureTypes.faces]
     
+    # Get image analysis
+    image_data = io.BytesIO(image_file.read())
+    analysis = cv_client.analyze_image_in_stream(image_data , features)
+   
+    # Get faces
+    if analysis.faces:
+        st.write(len(analysis.faces), 'faces detected.')
+
+        # Prepare image for drawing
+        fig = plt.figure(figsize=(8, 6))
+        plt.axis('off')
+        image = Image.open(image_file)
+        draw = ImageDraw.Draw(image)
+        color = 'lightgreen'
+
+        # Draw and annotate each face
+        for face in analysis.faces:
+            r = face.face_rectangle
+            bounding_box = ((r.left, r.top), (r.left + r.width, r.top + r.height))
+            draw = ImageDraw.Draw(image)
+            draw.rectangle(bounding_box, outline=color, width=5)
+            annotation = 'Person at approximately {}, {}'.format(r.left, r.top)
+            plt.annotate(annotation,(r.left, r.top), backgroundcolor=color)
+
+        # Save annotated image
+        plt.imshow(image)
+        st.write('Results saved in', image)
+
 def GetThumbnail(image_file):
     st.write('Generating thumbnail')
     # Generate a thumbnail
@@ -150,7 +184,6 @@ def Readtextfromimage(image_file):
                 # Uncomment the following line if you'd like to see the bounding box 
                 #print(line.bounding_box)
 
-   
     
 if app == "Image Analysis" :
     st.subheader("Application : Image Analysis")
