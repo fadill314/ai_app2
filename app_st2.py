@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit.elements.image import image_to_url
 import io
 
 st.title("EMC2 / Cloud AI Module")
