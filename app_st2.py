@@ -211,4 +211,8 @@ elif app == "OCR" :
     
 elif app == "Face Analysis" :
     st.subheader("Application : Face Analysis")
-    st.write('Do it yourself !')
+        # Get image
+    image_file = st.file_uploader('Load image ',type=['png', 'jpg'])
+    if image_file is not None:
+        st.image(image_file)
+        DetectFace(image_file)
