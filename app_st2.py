@@ -1,5 +1,6 @@
 import streamlit as st
 import io
+import time
 
 st.title("EMC2 / Cloud AI Module")
 st.header("App for testing Azure AI Service")
