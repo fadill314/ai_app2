@@ -6,7 +6,6 @@ st.title("EHTP-MSDE")
 st.header("App for testing Azure AI Service")
 
 st.sidebar.image("https://seeklogo.com/images/E/ecole-hassania-des-travaux-publics-ehtp-logo-3D5770F217-seeklogo.com.png")
-st.sidebar.header("Executive Master Cloud Computing")
 
 app=st.sidebar.selectbox('Select type of Application', ["--- Choose application ---","Image Analysis", "Thumbnail Image", "Face Analysis", "OCR"])
 
